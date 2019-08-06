@@ -6,7 +6,7 @@ public class Player : Ship
 {
 
     #region ATTRIBUTES
-    [Header("Shooting Data")]
+    [Header("Shooting Input")]
     public KeyCode DebugKey; //change this to touch controls
     #endregion
 
