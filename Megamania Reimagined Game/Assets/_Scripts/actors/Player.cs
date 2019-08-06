@@ -31,7 +31,7 @@ public class Player : Ship
     protected override void Start()
     {
 
-        movement = new PlayerMovement();
+        movement = new Play();
         base.Start();
 
     }
