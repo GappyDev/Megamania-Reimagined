@@ -12,8 +12,9 @@ public class Player : Ship
     public Joystick joystick;
 
     [Header("Shooting Input")]
-    public KeyCode DebugKey; //change this to touch controls
+    public KeyCode DebugKey; 
     public ImageTouchableButton shootButton;
+    public Transform cannon;
     #endregion
 
     protected override void OnDeath()
@@ -27,7 +28,7 @@ public class Player : Ship
 
         if ((Input.GetKey(DebugKey) || shootButton.pressed) && realTime >= nextFire)
         {
-            Debug.Log("shot");
+            Instantiate(data.bulletPrefab, cannon.position, Quaternion.identity);
             nextFire =realTime + fireRate;
         }
 

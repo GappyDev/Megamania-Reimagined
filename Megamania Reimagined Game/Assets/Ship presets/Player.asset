@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   fireRate: 0.5
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 7124598686589098529, guid: 1eb84feaec1d0ec41877e14ae8e95c95,
+    type: 3}
   shotClip: {fileID: 0}
   explosionClip: {fileID: 0}
   explosionPrefab: {fileID: 0}
