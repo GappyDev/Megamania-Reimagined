@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : Ship
 {
 
     #region ATTRIBUTES
+
+    [Header("Movement Input")]
+    public Joystick joystick;
+
     [Header("Shooting Input")]
     public KeyCode DebugKey; //change this to touch controls
+    public ImageTouchableButton shootButton;
     #endregion
 
     protected override void OnDeath()
@@ -19,7 +25,7 @@ public class Player : Ship
     {
         realTime = Time.time;
 
-        if (Input.GetKey(DebugKey) && realTime >= nextFire)
+        if ((Input.GetKey(DebugKey) || shootButton.pressed) && realTime >= nextFire)
         {
             Debug.Log("shot");
             nextFire =realTime + fireRate;
@@ -31,7 +37,7 @@ public class Player : Ship
     protected override void Start()
     {
 
-        movement = new Play();
+        movement = new Play(joystick);
         base.Start();
 
     }
