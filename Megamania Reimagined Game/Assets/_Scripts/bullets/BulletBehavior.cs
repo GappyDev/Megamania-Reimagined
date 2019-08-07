@@ -7,14 +7,14 @@ public class BulletBehavior : MonoBehaviour
     [Header("Bullet's data")]
     public BulletData data;
 
-    private Movement movement;
+    private BulletMovement movement;
 
-    private void initializeDataData()
+    private void initializeData()
     {
         movement = new Bullet(data.direction,data.speed);
     }
 
-    private void Awake() => initializeDataData();
+    private void Awake() => initializeData();
 
     private void Start()
     {

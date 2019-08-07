@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : Movement
+public class Bullet : BulletMovement
 {
     Direction direction;
 
@@ -10,7 +10,7 @@ public class Bullet : Movement
     {
 
         direction = dir;
-        Speed = speed;
+        speed = speed;
 
     }
     public override void move(GameObject body)
@@ -21,10 +21,10 @@ public class Bullet : Movement
         switch (direction)
         {
             case Direction.down:
-                posY = Time.deltaTime * -Speed;
+                posY = Time.deltaTime * -speed;
                 break;
             case Direction.up:
-                posY = Time.deltaTime * Speed;
+                posY = Time.deltaTime * speed;
                 break;
         }
         
