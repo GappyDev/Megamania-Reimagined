@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Type { sticky,linear}
+public enum Type { impulseByMovement,impulseByForce}
 public abstract class BulletBehavior : MonoBehaviour
 {
     [Header("Bullet's data")]
@@ -25,7 +25,15 @@ public abstract class BulletBehavior : MonoBehaviour
     private void checkOnUpdateExecution()
     {
 
-        if (executeOnUpdate) executeBehaviour();
+        if (executeOnUpdate)
+        {
+
+            movement.move(gameObject);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            float MovY = rb.position.y + Time.deltaTime * data.speed;
+            rb.position = new Vector3(rb.position.x, MovY, rb.position.z);
+            Destroy(gameObject, data.lifeTime);
+        }
 
     }
 
@@ -35,10 +43,11 @@ public abstract class BulletBehavior : MonoBehaviour
         switch (type)
         {
 
-            case Type.linear:
+            case Type.impulseByForce:
                 executeBehaviour();
+                Debug.Log("force");
                 break;
-            case Type.sticky:
+            case Type.impulseByMovement:
                 executeOnUpdate = true;
                 break;
         }
@@ -48,7 +57,7 @@ public abstract class BulletBehavior : MonoBehaviour
 
     protected abstract void initializeData();
 
-    private void Awake() => initializeData();
+    protected virtual void Awake() => initializeData();
 
 
 }
