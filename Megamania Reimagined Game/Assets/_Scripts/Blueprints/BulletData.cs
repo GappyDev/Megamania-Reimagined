@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction { up, down }
-
 [CreateAssetMenu(menuName =("My Assets/New Bullet Data"))]
 public class BulletData : ScriptableObject
 {
