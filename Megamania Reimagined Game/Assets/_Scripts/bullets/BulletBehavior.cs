@@ -4,9 +4,12 @@ using UnityEngine;
 
 public abstract class BulletBehavior : MonoBehaviour
 {
-
+    //public attributes
     [Header("Bullet Data")]
     public BulletData data;
+
+    //private attributes
+    protected Rigidbody body;
 
     //abstract methods
     protected abstract void initializeData();

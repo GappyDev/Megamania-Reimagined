@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2596827336111550865}
   - component: {fileID: 1647995144693205484}
   m_Layer: 0
-  m_Name: bullet
+  m_Name: enemy bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,9 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f76c9ab693a5a44fa915927b9da3a5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5b81e9a83df0f9a4c9cd31fd66dd07cc, type: 2}
+  data: {fileID: 11400000, guid: 6a74bea0d24c5a440ba3cbb5267b1d89, type: 2}
   magnitude: 15
-  direction: 0
+  direction: 1
 --- !u!1 &8485585574023874389
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 674604761720630596}
   - component: {fileID: 8120163435172801534}
   - component: {fileID: 4885302190820318789}
-  - component: {fileID: 8998322583480723983}
+  - component: {fileID: 2209936989115121502}
   m_Layer: 0
   m_Name: stickyBullet
   m_TagString: Untagged
@@ -142,7 +142,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8998322583480723983
+--- !u!114 &2209936989115121502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,8 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7088115184526260407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebc7dc9887c4d9d46b7520aae3f66bc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 254137c9b40b6064fba57e07c3b0497d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 23a781a1927d8944ca9a139d951da1a0, type: 2}
-  type: 0
+  data: {fileID: 11400000, guid: 5b81e9a83df0f9a4c9cd31fd66dd07cc, type: 2}

@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934590af4e9ac2c438535eefb32c8be1, type: 3}
   m_Name: Player Shot
   m_EditorClassIdentifier: 
-  lifeTime: 0.517
-  speed: 1500
-  direction: 0
+  lifeTime: 0.55
+  speed: 50

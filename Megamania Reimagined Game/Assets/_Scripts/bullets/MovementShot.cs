@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementShot : MonoBehaviour
+public class MovementShot : BulletBehavior
 {
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody playerBody;
+
+    protected override void initializeData()
     {
-        
+        playerBody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+        body = GetComponent<Rigidbody>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void moveBullet()
     {
-        
+
+        float MovY = body.position.y + (Time.deltaTime * data.speed);
+        body.position = new Vector3(playerBody.position.x, MovY, body.position.z);
+        Destroy(gameObject, data.lifeTime);
+
     }
+
+    private void FixedUpdate() => moveBullet();
+
 }
