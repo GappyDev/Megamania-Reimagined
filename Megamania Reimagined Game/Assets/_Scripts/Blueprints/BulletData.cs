@@ -11,7 +11,4 @@ public class BulletData : ScriptableObject
 
     [Header("movement data")]
     public float speed = 200f;
-
-    [Header("Direction")]
-    public Direction direction;
 }
