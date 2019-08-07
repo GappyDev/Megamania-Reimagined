@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class BulletMovement 
 {
-    protected float speed;
+    protected float movementSpeed;
     public abstract void move(GameObject body);
 }

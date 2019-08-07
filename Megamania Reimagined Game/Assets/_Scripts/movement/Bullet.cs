@@ -10,7 +10,7 @@ public class Bullet : BulletMovement
     {
 
         direction = dir;
-        speed = speed;
+        movementSpeed = speed;
 
     }
     public override void move(GameObject body)
@@ -21,10 +21,10 @@ public class Bullet : BulletMovement
         switch (direction)
         {
             case Direction.down:
-                posY = Time.deltaTime * -speed;
+                posY = Time.deltaTime * -movementSpeed;
                 break;
             case Direction.up:
-                posY = Time.deltaTime * speed;
+                posY = Time.deltaTime * movementSpeed;
                 break;
         }
         
