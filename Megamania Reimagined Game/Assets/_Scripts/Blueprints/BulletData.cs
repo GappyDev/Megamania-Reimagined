@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction { up, down }
-
 [CreateAssetMenu(menuName =("My Assets/New Bullet Data"))]
 public class BulletData : ScriptableObject
 {
@@ -13,7 +11,4 @@ public class BulletData : ScriptableObject
 
     [Header("movement data")]
     public float speed = 200f;
-
-    [Header("Direction")]
-    public Direction direction;
 }

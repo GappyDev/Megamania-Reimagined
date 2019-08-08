@@ -2,24 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehavior : MonoBehaviour
+public abstract class BulletBehavior : MonoBehaviour
 {
-    [Header("Bullet's data")]
+    //public attributes
+    [Header("Bullet Data")]
     public BulletData data;
 
-    private Movement movement;
+    //private attributes
+    protected Rigidbody body;
 
-    private void initializeDataData()
-    {
-        movement = new Bullet(data.direction,data.speed);
-    }
+    //abstract methods
+    protected abstract void initializeData();
+    protected abstract void moveBullet();
 
-    private void Awake() => initializeDataData();
-
-    private void Start()
-    {
-        movement.move(gameObject);
-        Destroy(gameObject, data.lifeTime);
-    }
-
+    private void Awake() => initializeData();
 }
