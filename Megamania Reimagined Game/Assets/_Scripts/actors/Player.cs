@@ -34,6 +34,7 @@ public class Player : Ship
 
     }
 
+
     // Start is called before the first frame update
     protected override void Start()
     {
