@@ -401,10 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   status: 0
-  health: 100
-  consumeSpeed: 2
-  consumeToScoreSpeed: 30
-  recoverSpeed: 50
+  data: {fileID: 11400000, guid: a57f367a9b3d19040bd2ab8939f508e3, type: 2}
   fuel: {fileID: 1574072811}
   tanks: {fileID: 1085325819}
   delay: 0.6
@@ -859,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.94130874, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1244,7 +1241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1551745, g: 1, b: 0, a: 0.6862745}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6862745}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

@@ -42,4 +42,14 @@ public class Hamburger : NPC
     {
 
     }
+
+    protected override void Stop()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void Resume()
+    {
+        throw new System.NotImplementedException();
+    }
 }

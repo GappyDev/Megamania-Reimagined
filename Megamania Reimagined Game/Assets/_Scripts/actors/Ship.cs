@@ -6,7 +6,7 @@ public abstract class Ship : MonoBehaviour
 {
 
     #region ATTRIBUTES
-    protected Movement movement;
+    protected Movement movement,savedMovement;
 
     [Header("Ship's data")]
     public ShipData data;
@@ -17,6 +17,10 @@ public abstract class Ship : MonoBehaviour
     #region METHODS
     protected abstract void OnDeath();
     protected abstract void shoot();
+
+    protected abstract void Stop();
+
+    protected abstract void Resume();
 
 
     protected virtual void initializeData(ShipData sd)

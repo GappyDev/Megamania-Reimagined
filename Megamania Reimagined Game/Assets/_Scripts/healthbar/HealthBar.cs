@@ -73,6 +73,8 @@ public class HealthBar : MonoBehaviour
         if (lives < 0) status = Status.gameOver;
     }
 
+    public void Hurt() => currentHealth = 0;
+
     private void OnGameplay()
     {
 
