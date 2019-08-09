@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
         Rigidbody rb = other.GetComponent<Rigidbody>();
         Vector3 pos = new Vector3();
 
-        if (other.CompareTag("normalEnemy"))
+        if (other.CompareTag("Enemy"))
         {
 
             switch (orientation)
