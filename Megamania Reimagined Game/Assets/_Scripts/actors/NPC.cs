@@ -7,6 +7,7 @@ public abstract class NPC : Ship
     #region ATTRIBUTES
     protected int points;
     protected Vector3 initialPosition;
+    protected Rigidbody body;
     #endregion
 
     #region METHODS
@@ -14,6 +15,7 @@ public abstract class NPC : Ship
 
     protected override void initializeData(ShipData sd)
     {
+        body = GetComponent<Rigidbody>();
         points = sd.points;
         base.initializeData(sd);
     }

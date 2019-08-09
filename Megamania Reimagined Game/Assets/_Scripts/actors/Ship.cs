@@ -18,9 +18,9 @@ public abstract class Ship : MonoBehaviour
     protected abstract void OnDeath();
     protected abstract void shoot();
 
-    protected abstract void Stop();
+    public abstract void Stop();
 
-    protected abstract void Resume();
+    public abstract void Resume();
 
 
     protected virtual void initializeData(ShipData sd)

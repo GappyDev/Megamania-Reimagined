@@ -34,22 +34,21 @@ public class Hamburger : NPC
     {
 
         movement = new Linear();
+        savedMovement = movement;
         base.Start();
 
     }
 
-    protected override void resetPosition()
-    {
+    protected override void resetPosition()=> body.position = initialPosition;
 
+    public override void Stop()
+    {
+        movement = new Idle();
+        resetPosition();
     }
 
-    protected override void Stop()
+    public override void Resume()
     {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void Resume()
-    {
-        throw new System.NotImplementedException();
+        movement = savedMovement;
     }
 }

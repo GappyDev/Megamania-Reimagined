@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine;
 
 public enum Status { playing,stop,addScore,gameOver}
@@ -19,6 +20,10 @@ public class HealthBar : MonoBehaviour
 
     [Header("Delay data")] //sets a delay on every call of the method
     public float delay;
+
+    [Header("Stop and resume event")]
+    public UnityEvent Onstop;
+    public UnityEvent OnResume;
 
     public static int lives = 3; //amount of lives the player has before triggering game over
     private float fuelAspectRatio,tanksAspectRatio,currentHealth,livesAmount,delayIni;
@@ -65,6 +70,7 @@ public class HealthBar : MonoBehaviour
     private void ConsumeToScore()
     {
         currentHealth -= Time.deltaTime * data.consumeToScoreSpeed;
+        //add score
 
     }
 
@@ -73,7 +79,7 @@ public class HealthBar : MonoBehaviour
         if (lives < 0) status = Status.gameOver;
     }
 
-    public void Hurt() => currentHealth = 0;
+    public void Hurt() => currentHealth = 0; //it is called when the player collides with an Enemy or Bullet
 
     private void OnGameplay()
     {
@@ -82,19 +88,22 @@ public class HealthBar : MonoBehaviour
         delay = delayIni;
 
         if (currentHealth <= data.health && currentHealth > 0) Consume();
-        else if (currentHealth <= 0) { lives--; status = Status.stop; } 
-        //else if(currentHealth >= health) 
+        else if (currentHealth <= 0)
+        {
+            lives--;
+            Onstop.Invoke(); //triggers the stop event on all ships when the current health reaches 0
+            status = Status.stop;
+        } 
 
     }
 
     private void OnStop()
     {
-        //trigger event on ship
-
         if (currentHealth <= data.health) Refill();
         else
         {
             currentHealth = data.health ; //force the value to be equal to the max health amount
+            OnResume.Invoke(); //trigger resume event on ships
             status = Status.playing;
         }
         

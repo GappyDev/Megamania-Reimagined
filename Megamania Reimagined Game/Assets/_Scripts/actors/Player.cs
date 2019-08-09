@@ -42,13 +42,13 @@ public class Player : Ship
 
     }
 
-    protected override void Stop()
+    public override void Stop()
     {
         movement = new Idle();
         canShoot = false;
     }
 
-    protected override void Resume()
+    public override void Resume()
     {
         movement = savedMovement;
         canShoot = true;
