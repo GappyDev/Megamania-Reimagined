@@ -27,6 +27,7 @@ public abstract class Ship : MonoBehaviour
     {
         //movement data
         movement.Speed = sd.speed;
+        savedMovement = movement;
 
         //shoot data
         fireRate = sd.fireRate;

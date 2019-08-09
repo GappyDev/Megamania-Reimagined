@@ -60,7 +60,6 @@ public class Player : Ship
     {
 
         movement = new Play(joystick);
-        savedMovement = movement;
         base.Start();
 
     }

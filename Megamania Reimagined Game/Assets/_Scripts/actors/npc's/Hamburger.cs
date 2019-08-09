@@ -34,7 +34,6 @@ public class Hamburger : NPC
     {
 
         movement = new Linear();
-        savedMovement = movement;
         base.Start();
 
     }
