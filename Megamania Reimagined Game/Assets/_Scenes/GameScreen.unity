@@ -402,11 +402,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   status: 0
   health: 100
-  consumeSpeed: 10
-  consumeToScoreSpeed: 1
-  recoverSpeed: 15
+  consumeSpeed: 2
+  consumeToScoreSpeed: 30
+  recoverSpeed: 50
   fuel: {fileID: 1574072811}
   tanks: {fileID: 1085325819}
+  delay: 0.6
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,7 +870,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

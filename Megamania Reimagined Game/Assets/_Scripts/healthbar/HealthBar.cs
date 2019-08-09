@@ -9,12 +9,9 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField]
     private Status status;
-   
+
     [Header("health data")]
-    public float health = 100f;
-    public float consumeSpeed = 1;
-    public float consumeToScoreSpeed = 1;
-    public float recoverSpeed = 1;
+    public HealthBarData data;
 
     [Header("UI elements")]
     public Image fuel;
@@ -28,11 +25,10 @@ public class HealthBar : MonoBehaviour
 
     private void InitializeData()
     {
-        currentHealth = health;
+        currentHealth = data.health;
         livesAmount = lives;
         status = Status.playing;
         delayIni = delay;
-
     }
 
     private void Start() => InitializeData();
@@ -40,34 +36,35 @@ public class HealthBar : MonoBehaviour
     private void UpdateUI()
     {
         //get ratios
-        fuelAspectRatio = currentHealth / health;
+        fuelAspectRatio = currentHealth / data.health;
         tanksAspectRatio = lives / livesAmount;
         //update ui elements below
         fuel.fillAmount = fuelAspectRatio;
         tanks.fillAmount = tanksAspectRatio;
+        //update UI colors to the gradients
+        fuel.color = data.gradient1.Evaluate(fuelAspectRatio);
+        tanks.color = data.gradient2.Evaluate(tanksAspectRatio);
+       
     }
 
     private void Refill()
     {
-        UpdateUI(); //update bar
         //add health over time
-        currentHealth += Time.deltaTime * recoverSpeed;
+        currentHealth += Time.deltaTime * data.recoverSpeed;
 
     }
 
     private void Consume()
     {
 
-        UpdateUI(); //update bar
         //consume health over time
-        currentHealth -= Time.deltaTime * consumeSpeed;
+        currentHealth -= Time.deltaTime * data.consumeSpeed;
 
     }
 
     private void ConsumeToScore()
     {
-        UpdateUI(); //updateBar
-        currentHealth -= Time.deltaTime * consumeToScoreSpeed;
+        currentHealth -= Time.deltaTime * data.consumeToScoreSpeed;
 
     }
 
@@ -82,7 +79,7 @@ public class HealthBar : MonoBehaviour
         //reset delay effect 
         delay = delayIni;
 
-        if (currentHealth <= health && currentHealth > 0) Consume();
+        if (currentHealth <= data.health && currentHealth > 0) Consume();
         else if (currentHealth <= 0) { lives--; status = Status.stop; } 
         //else if(currentHealth >= health) 
 
@@ -92,10 +89,10 @@ public class HealthBar : MonoBehaviour
     {
         //trigger event on ship
 
-        if (currentHealth <= health) Refill();
+        if (currentHealth <= data.health) Refill();
         else
         {
-            currentHealth = health ; //force the value to be equal to the max health amount
+            currentHealth = data.health ; //force the value to be equal to the max health amount
             status = Status.playing;
         }
         
@@ -103,8 +100,9 @@ public class HealthBar : MonoBehaviour
 
     private void FixedUpdate()
     {
-        checkGameOver();
-        Debug.Log(lives);
+        checkGameOver();//check gameOver status
+
+        UpdateUI(); //update bars
         switch (status)
         {
             case Status.playing:
