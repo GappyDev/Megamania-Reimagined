@@ -18,22 +18,19 @@ public class HealthBar : MonoBehaviour
     public Image fuel;
     public Image tanks;
 
-    [Header("Delay data")] //sets a delay on every call of the method
-    public float delay;
-
     [Header("Stop and resume event")]
-    public UnityEvent Onstop;
-    public UnityEvent OnResume;
+    public UnityEvent OnStopEvent;
+    public UnityEvent OnResumeEvent;
 
     public static int lives = 3; //amount of lives the player has before triggering game over
-    private float fuelAspectRatio,tanksAspectRatio,currentHealth,livesAmount,delayIni;
+    private float fuelAspectRatio,tanksAspectRatio,currentHealth,maxLivesAmount,delayIni;
 
     private void InitializeData()
     {
         currentHealth = data.health;
-        livesAmount = lives;
+        maxLivesAmount = lives;
         status = Status.playing;
-        delayIni = delay;
+        delayIni = data.delay;
     }
 
     private void Start() => InitializeData();
@@ -42,7 +39,7 @@ public class HealthBar : MonoBehaviour
     {
         //get ratios
         fuelAspectRatio = currentHealth / data.health;
-        tanksAspectRatio = lives / livesAmount;
+        tanksAspectRatio = lives / maxLivesAmount;
         //update ui elements below
         fuel.fillAmount = fuelAspectRatio;
         tanks.fillAmount = tanksAspectRatio;
@@ -85,13 +82,13 @@ public class HealthBar : MonoBehaviour
     {
 
         //reset delay effect 
-        delay = delayIni;
+        data.delay = delayIni;
 
         if (currentHealth <= data.health && currentHealth > 0) Consume();
         else if (currentHealth <= 0)
         {
             lives--;
-            Onstop.Invoke(); //triggers the stop event on all ships when the current health reaches 0
+            OnStopEvent.Invoke(); //triggers the stop event on all ships when the current health reaches 0
             status = Status.stop;
         } 
 
@@ -103,7 +100,7 @@ public class HealthBar : MonoBehaviour
         else
         {
             currentHealth = data.health ; //force the value to be equal to the max health amount
-            OnResume.Invoke(); //trigger resume event on ships
+            OnResumeEvent.Invoke(); //trigger resume event on ships
             status = Status.playing;
         }
         
@@ -120,8 +117,8 @@ public class HealthBar : MonoBehaviour
                 OnGameplay();
                 break;
             case Status.stop:
-                if (delay <= 0) OnStop();
-                else delay -= Time.deltaTime;
+                if (data.delay <= 0) OnStop();
+                else data.delay -= Time.deltaTime;
                 break;
             case Status.addScore:
                 ConsumeToScore();
