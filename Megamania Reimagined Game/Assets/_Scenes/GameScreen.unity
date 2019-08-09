@@ -576,8 +576,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: a57f367a9b3d19040bd2ab8939f508e3, type: 2}
   fuel: {fileID: 1574072811}
   tanks: {fileID: 1085325819}
-  delay: 0.6
-  Onstop:
+  OnStopEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1649990329}
@@ -593,7 +592,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  OnResume:
+  OnResumeEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1649990329}
