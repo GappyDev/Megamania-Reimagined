@@ -22,8 +22,8 @@ public abstract class NPC : Ship
 
     protected override void Start()
     {
-        initialPosition = gameObject.GetComponent<Rigidbody>().position; //saves the initial position of the ship npc
         base.Start();
+        initialPosition =body.position; //saves the initial position of the ship npc
     }
 
     #endregion
