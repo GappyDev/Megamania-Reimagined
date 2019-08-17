@@ -72,6 +72,6 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   health: 100
   consumeSpeed: 2
-  consumeToScoreSpeed: 30
+  consumeToScoreSpeed: 35
   recoverSpeed: 50
   delay: 0.6
