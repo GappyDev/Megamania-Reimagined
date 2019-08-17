@@ -123,7 +123,7 @@ public class HealthBar : MonoBehaviour
         if (currentHealth < data.health) Refill();
         else
         {
-            //currentHealth = data.health;
+            currentHealth = data.health;
             OnNextWaveEvent.Invoke();
             OnResumeEvent.Invoke();
             status = Status.playing;
