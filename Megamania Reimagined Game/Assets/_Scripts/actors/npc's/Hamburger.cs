@@ -11,6 +11,7 @@ public class Hamburger : NPC
     {
 
         Debug.Log("enemy explode");
+        Destroy(gameObject);
 
     }
 

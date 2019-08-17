@@ -16,4 +16,5 @@ public abstract class BulletBehavior : MonoBehaviour
     protected abstract void moveBullet();
 
     private void Awake() => initializeData();
+
 }

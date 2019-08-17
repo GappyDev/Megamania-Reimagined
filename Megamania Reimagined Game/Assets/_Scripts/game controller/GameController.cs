@@ -27,4 +27,6 @@ public class GameController : MonoBehaviour
     public void Stop() => delegateStop();
 
     public void Resume() => delegateResume();
+
+    public void NextWave()=> FindObjectOfType<WaveManager>().InstantiateWave();
 }

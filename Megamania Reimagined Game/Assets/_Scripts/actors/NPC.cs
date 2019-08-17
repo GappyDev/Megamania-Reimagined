@@ -26,5 +26,12 @@ public abstract class NPC : Ship
         initialPosition =body.position; //saves the initial position of the ship npc
     }
 
+    private void OnCollisionEnter(Collision col)
+    {
+        Destroy(col.gameObject);
+        if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Bullet")) OnDeath();
+    }
+
+
     #endregion
 }

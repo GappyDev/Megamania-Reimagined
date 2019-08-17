@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine;
 
-public enum Status { playing,stop,addScore,gameOver}
+public enum Status { playing,stop,addScore,gameOver,LoadWave}
 
 public class HealthBar : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class HealthBar : MonoBehaviour
     [Header("Stop and resume event")]
     public UnityEvent OnStopEvent;
     public UnityEvent OnResumeEvent;
+    public UnityEvent OnNextWaveEvent;
 
     public static int lives = 3; //amount of lives the player has before triggering game over
     private float fuelAspectRatio,tanksAspectRatio,currentHealth,maxLivesAmount,delayIni;
@@ -33,7 +34,11 @@ public class HealthBar : MonoBehaviour
         delayIni = data.delay;
     }
 
-    private void Start() => InitializeData();
+    private void Start()
+    {
+        InitializeData();
+        OnNextWaveEvent.Invoke(); //instiantiate first wave
+    }
 
     private void UpdateUI()
     {
@@ -106,6 +111,29 @@ public class HealthBar : MonoBehaviour
         
     }
 
+    private void OnScore()
+    {
+        OnStopEvent.Invoke(); //stop ship
+        if (currentHealth > 0) ConsumeToScore(); //consume fuel to score
+        else status = Status.LoadWave;
+    }
+
+    private void OnLoadWave()
+    {
+        if (currentHealth < data.health) Refill();
+        else
+        {
+            //currentHealth = data.health;
+            OnNextWaveEvent.Invoke();
+            OnResumeEvent.Invoke();
+            status = Status.playing;
+
+        }
+
+    }
+
+    public void setStatus(Status s) => status = s;
+
     private void FixedUpdate()
     {
         checkGameOver();//check gameOver status
@@ -121,7 +149,10 @@ public class HealthBar : MonoBehaviour
                 else data.delay -= Time.deltaTime;
                 break;
             case Status.addScore:
-                ConsumeToScore();
+                OnScore();
+                break;
+            case Status.LoadWave:
+                OnLoadWave();
                 break;
             case Status.gameOver:
                 break;
