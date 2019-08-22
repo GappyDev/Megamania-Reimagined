@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomFall : Movement
+public class MoveDown : Movement
 {
     public override void move(GameObject body)
     {

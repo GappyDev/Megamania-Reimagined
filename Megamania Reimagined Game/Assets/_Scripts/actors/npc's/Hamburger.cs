@@ -34,7 +34,7 @@ public class Hamburger : NPC
     protected override void Start()
     {
 
-        movement = new Linear();
+        movement = new MoveRight();
         base.Start();
 
     }
@@ -43,7 +43,7 @@ public class Hamburger : NPC
 
     public override void Stop()
     {
-        movement = new Idle();
+        movement = new Sine();
         resetPosition();
     }
 
