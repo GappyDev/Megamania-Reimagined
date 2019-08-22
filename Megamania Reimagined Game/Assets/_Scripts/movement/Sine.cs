@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sine : Movement
 {
 
-    private float amplitude = 25, frequency = 10;
+    private float amplitude = 2, frequency = 2;
 
     public override void move(GameObject body)
     {

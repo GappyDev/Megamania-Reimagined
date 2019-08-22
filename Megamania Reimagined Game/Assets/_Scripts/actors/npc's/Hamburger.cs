@@ -43,7 +43,7 @@ public class Hamburger : NPC
 
     public override void Stop()
     {
-        movement = new Sine();
+        movement = new Idle();
         resetPosition();
     }
 
