@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
+public enum Version{Mobile, Web}
+
 public class Player : Ship
 {
+
+    #region 
+    [Header("Version")]
+    public Version version = Version.Web;
+    public string joystickShotButton = "joystick button 0"; //button A on the xbox controller
+    
+    #endregion
 
     #region ATTRIBUTES
 
@@ -33,7 +42,7 @@ public class Player : Ship
         {
             realTime = Time.time;
 
-            if ((Input.GetKey(DebugKey) || shootButton.pressed) && realTime >= nextFire)
+            if ((Input.GetKey(DebugKey) || shootButton.pressed || Input.GetKey(joystickShotButton)) && realTime >= nextFire)
             {
                 Instantiate(data.bulletPrefab, cannon.position, Quaternion.identity);
                 nextFire = realTime + fireRate;
@@ -59,7 +68,17 @@ public class Player : Ship
     protected override void Start()
     {
 
-        movement = new Play(joystick);
+        switch (version)
+        {
+            case Version.Mobile:
+            movement = new Play(joystick);
+            break;
+            case Version.Web:
+            movement = new PlayWeb();
+            break;
+            default:
+            break;
+        }
         base.Start();
 
     }
