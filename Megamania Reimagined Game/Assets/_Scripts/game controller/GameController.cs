@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject[] pauseUI;
 
+    [Header("Game Version")]
+    public Version version = Version.Web;
+    public KeyCode pauseKey; 
+
     private void getReference() => inGameShips = FindObjectsOfType<Ship>();
 
     private void delegateStop()
@@ -56,4 +60,17 @@ public class GameController : MonoBehaviour
     public void Resume() => delegateResume();
 
     public void NextWave()=> FindObjectOfType<WaveManager>().InstantiateWave();
+
+    //Built in Methods
+    private void Update()
+    {
+
+        if(version == Version.Web)
+        {
+
+            if(Input.GetKey("joystick button 7") || Input.GetKey(pauseKey)) PauseGame();
+
+        }else return;
+
+    }
 }
