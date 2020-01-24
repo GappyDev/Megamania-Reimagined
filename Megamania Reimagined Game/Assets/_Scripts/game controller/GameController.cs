@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -16,6 +17,10 @@ public class GameController : MonoBehaviour
     [Header("Game Version")]
     public Version version = Version.Web;
     public KeyCode pauseKey; 
+    public GameObject firstSelectedButton; //button to be selected first while the game is puased;
+
+    //private event handler
+    private EventSystem es;
 
     private void getReference() => inGameShips = FindObjectsOfType<Ship>();
 
@@ -35,8 +40,10 @@ public class GameController : MonoBehaviour
     //button methods
     public void PauseGame()
     {
+
         if (isPaused)
         {
+            es.SetSelectedGameObject(null);
             foreach (GameObject obj in pauseUI) obj.SetActive(false);//deactivate pause menu
             foreach (GameObject obj in gameHUD) obj.SetActive(true); //activate digital controls
 
@@ -45,6 +52,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            es.SetSelectedGameObject(firstSelectedButton); //set the first selected object to the first button of the pause menu
             Time.timeScale = 0;
             isPaused = true;
 
@@ -62,13 +70,19 @@ public class GameController : MonoBehaviour
     public void NextWave()=> FindObjectOfType<WaveManager>().InstantiateWave();
 
     //Built in Methods
+    private void Start()=> es=  EventSystem.current;
+
     private void Update()
     {
 
         if(version == Version.Web)
         {
 
-            if(Input.GetKey("joystick button 7") || Input.GetKey(pauseKey)) PauseGame();
+            if(Input.GetKeyDown("joystick button 7") || Input.GetKeyDown(pauseKey))
+            {
+
+                 PauseGame();
+            }
 
         }else return;
 
