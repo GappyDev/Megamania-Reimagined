@@ -7,14 +7,16 @@ public class PlayWeb : Movement
     private float Min,Max,Offset = 0.75f,PosX;
     private Vector2 Screen_Dimensions;
     private Rigidbody rb;
+    private Animator anim;
     
 
     //CONSTRUCTOR
-    public PlayWeb()
+    public PlayWeb(GameObject body)
     {
         Screen_Dimensions = Observer.getScreenDimensions()/2;
         Min = -Screen_Dimensions.x + Offset;
         Max = Screen_Dimensions.x - Offset;
+        anim = body.GetComponent<Animator>();
     } 
 
     //Overriden method
@@ -22,6 +24,8 @@ public class PlayWeb : Movement
     {
         rb = body.GetComponent<Rigidbody>();
         PosX = rb.position.x + (Input.GetAxis("Horizontal") * Time.deltaTime * Speed);
+        anim.SetFloat("Xvalue",Input.GetAxis("Horizontal"));
         rb.position = new Vector3(Mathf.Clamp(PosX,Min,Max), rb.position.y, rb.position.z);
+        
     }
 }

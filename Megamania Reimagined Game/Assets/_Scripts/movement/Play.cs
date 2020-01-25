@@ -8,14 +8,16 @@ public class Play : Movement
     private Joystick virtualJoystick;
     private Vector2 screenDinWorldUnits;
     private float min, max,offset = 0.75f;
+    private Animator anim;
 
-    public Play(Joystick joystick)
+    public Play(Joystick joystick,GameObject body)
     {
 
         virtualJoystick = joystick;
         screenDinWorldUnits = Observer.getScreenDimensions() / 2;
         max = screenDinWorldUnits.x - offset;
         min = -screenDinWorldUnits.x + offset;
+        anim = body.GetComponent<Animator>();
         //screenDinWorldUnits.x = 8.3333, screenDinWorldUnits.y = 5
     }
 
@@ -24,7 +26,7 @@ public class Play : Movement
 
         Rigidbody rb = body.GetComponent<Rigidbody>();
         float posX = rb.position.x + (virtualJoystick.Horizontal * Time.deltaTime * Speed);
-
+        anim.SetFloat("Xvalue",Input.GetAxis("Horizontal"));
         rb.position = new Vector3(Mathf.Clamp(posX, min, max), rb.position.y, rb.position.z);
 
     }

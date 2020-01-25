@@ -71,10 +71,10 @@ public class Player : Ship
         switch (version)
         {
             case Version.Mobile:
-            movement = new Play(joystick);
+            movement = new Play(joystick,gameObject);
             break;
             case Version.Web:
-            movement = new PlayWeb();
+            movement = new PlayWeb(gameObject);
             break;
             default:
             break;
