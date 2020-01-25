@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class PlayWeb : Movement 
 {
 
@@ -26,6 +27,7 @@ public class PlayWeb : Movement
         PosX = rb.position.x + (Input.GetAxis("Horizontal") * Time.deltaTime * Speed);
         anim.SetFloat("Xvalue",Input.GetAxis("Horizontal"));
         rb.position = new Vector3(Mathf.Clamp(PosX,Min,Max), rb.position.y, rb.position.z);
-        
     }
+
+    
 }
