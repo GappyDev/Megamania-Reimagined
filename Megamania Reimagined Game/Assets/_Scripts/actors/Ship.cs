@@ -35,7 +35,7 @@ public abstract class Ship : MonoBehaviour
 
     protected virtual void Start() => initializeData(data);
 
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         shoot();
         movement.move(gameObject);

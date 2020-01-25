@@ -8,7 +8,7 @@ public enum Version{Mobile, Web}
 public class Player : Ship
 {
 
-    #region 
+    #region VERSION
     [Header("Version")]
     public Version version = Version.Web;
     public string joystickShotButton = "joystick button 0"; //button A on the xbox controller
@@ -17,7 +17,7 @@ public class Player : Ship
 
     #region ATTRIBUTES
 
-    [Header("Movement Input")]
+    [Header("Movement Input (Mobile)")]
     public Joystick joystick;
 
     [Header("Shooting Input")]
@@ -98,5 +98,7 @@ public class Player : Ship
         Destroy(other.gameObject);
 
     }
+
+
 
 }
