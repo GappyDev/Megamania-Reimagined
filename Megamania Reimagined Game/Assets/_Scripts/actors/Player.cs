@@ -29,6 +29,13 @@ public class Player : Ship
     public UnityEvent hurt;
 
     private bool canShoot = true;
+
+    #region Dimensions & dash mechanic
+    private Vector2 ScreenDimensions;
+    private float min, max;
+    private bool dashing = false;
+    private Rigidbody rb;
+    #endregion
     #endregion
 
     protected override void OnDeath()
@@ -79,8 +86,28 @@ public class Player : Ship
             default:
             break;
         }
+        ScreenDimensions = Observer.getScreenDimensions()/2;
+        min = -ScreenDimensions.x;
+        max = ScreenDimensions.x;
+        rb = GetComponent<Rigidbody>();
         base.Start();
 
+    }
+
+    //implementation of dash mechanic
+    protected override void FixedUpdate() 
+    {
+        if((Input.GetAxis("Horizontal")>0) && (Input.GetKeyDown("joystick button 5")) && (rb.position.x < max-2) && !dashing)
+            StartCoroutine(Dash(0.5f,1));
+        else if((Input.GetAxis("Horizontal")<0) && (Input.GetKeyDown("joystick button 4")) && (rb.position.x > min +2) && !dashing)
+            StartCoroutine(Dash(0.5f,-1));
+
+        if(dashing && ((rb.position.x > max -1)||(rb.position.x < min +1)))
+            {
+                rb.velocity = Vector3.zero;
+                dashing = false;   
+            }
+        base.FixedUpdate();
     }
 
   
@@ -99,6 +126,21 @@ public class Player : Ship
 
     }
 
+
+    //dash mechanic
+    private IEnumerator Dash(float duration, float direction)
+    {
+
+        dashing = true;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        //any particles or dash effect shoul be placed down here
+        rb.velocity += new Vector3(direction,0f,0f).normalized * 30;
+        yield return new WaitForSeconds(duration);
+        dashing = false;
+        rb.velocity = Vector3.zero;
+
+    }
 
 
 }

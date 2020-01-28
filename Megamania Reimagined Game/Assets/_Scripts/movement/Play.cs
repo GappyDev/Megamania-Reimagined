@@ -29,6 +29,19 @@ public class Play : Movement
         anim.SetFloat("Xvalue",Input.GetAxis("Horizontal"));
         rb.position = new Vector3(Mathf.Clamp(posX, min, max), rb.position.y, rb.position.z);
 
+        //controller input
+        if(Input.GetButtonDown("joystick button 5") || Input.GetButtonDown("joystick button 4"))
+            Dash(posX,rb);
+
+    }
+
+    //dash mechanic
+    private void Dash(float dirX, Rigidbody rb)
+    {
+
+        rb.velocity = Vector3.zero;
+        rb.velocity += new Vector3(dirX,0f,0f).normalized * 30;
+
     }
 
 }
