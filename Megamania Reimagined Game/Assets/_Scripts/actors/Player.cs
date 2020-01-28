@@ -34,10 +34,13 @@ public class Player : Ship
     private Vector2 ScreenDimensions;
     private float min, max;
     private bool dashing = false;
+    private bool canDash = true;
     private Rigidbody rb;
 
     [Header("Dash Effect particles")]
     public GameObject particlePrefab;
+    public int range = 6;
+    private HealthBar hbScript; //this is meant to handle the dash while gameplay is paused
     #endregion
     #endregion
 
@@ -71,7 +74,7 @@ public class Player : Ship
     {
         movement = savedMovement;
         canShoot = true;
-
+        canDash = true; //resume the dash ability
     }
 
     // Start is called before the first frame update
@@ -93,6 +96,7 @@ public class Player : Ship
         min = -ScreenDimensions.x;
         max = ScreenDimensions.x;
         rb = GetComponent<Rigidbody>();
+        hbScript = GameObject.FindObjectOfType<HealthBar>();
         base.Start();
 
     }
@@ -100,16 +104,7 @@ public class Player : Ship
     //implementation of dash mechanic (have to limit the use of the dash mechanic for tank refill or end of wave)
     protected override void FixedUpdate() 
     {
-        if((Input.GetAxis("Horizontal")>0) && (Input.GetKeyDown("joystick button 5")) && (rb.position.x < max-2) && !dashing)
-            StartCoroutine(Dash(0.5f,1));
-        else if((Input.GetAxis("Horizontal")<0) && (Input.GetKeyDown("joystick button 4")) && (rb.position.x > min +2) && !dashing)
-            StartCoroutine(Dash(0.5f,-1));
-
-        if(dashing && ((rb.position.x > max -1)||(rb.position.x < min +1)))
-            {
-                rb.velocity = Vector3.zero;
-                dashing = false;   
-            }
+        ApplyDash();
         base.FixedUpdate();
     }
 
@@ -133,18 +128,49 @@ public class Player : Ship
     //dash mechanic
     private IEnumerator Dash(float duration, float direction)
     {
+        canDash = false;
+        dashing = true;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         movement = new Idle();
         GameObject particleIns =Instantiate(particlePrefab,rb.position,Quaternion.identity);//instantiate particle effects
         Destroy(particleIns,2f);
         yield return new WaitForSeconds(2f); //wait till effect dissapears
-        dashing = true;
         rb.velocity += new Vector3(direction,0f,0f).normalized * 30;
         yield return new WaitForSeconds(duration);
-        movement = savedMovement;
+        //if its playing, resume movement, if not, do nothing, this is meant to finish dash effect and keep the idle movement
+        switch(hbScript.status) 
+        {
+            case Status.playing:
+                movement = savedMovement;
+            break;
+
+            default:
+            break;
+
+        }
         dashing = false;
+        canDash = true;
         rb.velocity = Vector3.zero;
 
+    }
+
+    private void ApplyDash()
+    {
+
+        if((Input.GetAxis("Horizontal")>0) && ((Input.GetKeyDown("joystick button 5")) || Input.GetKeyDown(KeyCode.UpArrow)) && (rb.position.x < max-range) && !dashing && canDash)
+            StartCoroutine(Dash(0.5f,1));
+        else if((Input.GetAxis("Horizontal")<0) && ((Input.GetKeyDown("joystick button 4")) || Input.GetKeyDown(KeyCode.DownArrow)) && (rb.position.x > min +range) && !dashing && canDash)
+            StartCoroutine(Dash(0.5f,-1));
+
+        //dash range control-> graphic representation: [[can dash right]    can dash both directions    [can dash left]]
+        if(dashing &&((rb.position.x > max - (range-2))||(rb.position.x < min +(range -2))))
+        {
+            rb.velocity = Vector3.zero;
+            dashing = false;   
+        }
+        //give the ability to dash only on gameplay
+        if(hbScript.status != Status.playing) canDash = false;
+        
     }
 }

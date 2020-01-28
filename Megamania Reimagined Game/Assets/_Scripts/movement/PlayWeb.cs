@@ -24,8 +24,8 @@ public class PlayWeb : Movement
     public override void move(GameObject body)
     {
         rb = body.GetComponent<Rigidbody>();
-        PosX = rb.position.x + (Input.GetAxis("Horizontal") * Time.deltaTime * Speed);
-        anim.SetFloat("Xvalue",Input.GetAxis("Horizontal"));
+        PosX = rb.position.x + (Input.GetAxisRaw("Horizontal") * Time.deltaTime * Speed);
+        anim.SetFloat("Xvalue",Input.GetAxisRaw("Horizontal"));
         rb.position = new Vector3(Mathf.Clamp(PosX,Min,Max), rb.position.y, rb.position.z);
 
     }

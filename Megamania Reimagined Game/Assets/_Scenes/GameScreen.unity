@@ -318,6 +318,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   particlePrefab: {fileID: 100000, guid: 876cb26c7c6ab42e49a9cace28b90b8b, type: 3}
+  range: 5
 --- !u!136 &223974228
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -841,7 +842,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1.193863e-39, z: -3.11e-43, w: -1.114e-42}
+  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 4.2708614e-24}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

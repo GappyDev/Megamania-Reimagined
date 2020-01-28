@@ -9,7 +9,7 @@ public enum Status { playing,stop,addScore,gameOver,LoadWave}
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    private Status status;
+    public Status status;
 
     [Header("health data")]
     public HealthBarData data;
