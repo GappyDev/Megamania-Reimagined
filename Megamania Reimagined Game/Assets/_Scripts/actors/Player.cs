@@ -35,6 +35,9 @@ public class Player : Ship
     private float min, max;
     private bool dashing = false;
     private Rigidbody rb;
+
+    [Header("Dash Effect particles")]
+    public GameObject particlePrefab;
     #endregion
     #endregion
 
@@ -94,7 +97,7 @@ public class Player : Ship
 
     }
 
-    //implementation of dash mechanic
+    //implementation of dash mechanic (have to limit the use of the dash mechanic for tank refill or end of wave)
     protected override void FixedUpdate() 
     {
         if((Input.GetAxis("Horizontal")>0) && (Input.GetKeyDown("joystick button 5")) && (rb.position.x < max-2) && !dashing)
@@ -130,17 +133,18 @@ public class Player : Ship
     //dash mechanic
     private IEnumerator Dash(float duration, float direction)
     {
-
-        dashing = true;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        //any particles or dash effect shoul be placed down here
+        movement = new Idle();
+        GameObject particleIns =Instantiate(particlePrefab,rb.position,Quaternion.identity);//instantiate particle effects
+        Destroy(particleIns,2f);
+        yield return new WaitForSeconds(2f); //wait till effect dissapears
+        dashing = true;
         rb.velocity += new Vector3(direction,0f,0f).normalized * 30;
         yield return new WaitForSeconds(duration);
+        movement = savedMovement;
         dashing = false;
         rb.velocity = Vector3.zero;
 
     }
-
-
 }
