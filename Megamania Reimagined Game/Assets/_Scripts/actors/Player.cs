@@ -136,6 +136,7 @@ public class Player : Ship
         GameObject particleIns =Instantiate(particlePrefab,rb.position,Quaternion.identity);//instantiate particle effects
         Destroy(particleIns,2f);
         yield return new WaitForSeconds(2f); //wait till effect dissapears
+        //ripplet effect goes here
         rb.velocity += new Vector3(direction,0f,0f).normalized * 30;
         yield return new WaitForSeconds(duration);
         //if its playing, resume movement, if not, do nothing, this is meant to finish dash effect and keep the idle movement
@@ -158,9 +159,9 @@ public class Player : Ship
     private void ApplyDash()
     {
 
-        if((Input.GetAxis("Horizontal")>0) && ((Input.GetKeyDown("joystick button 5")) || Input.GetKeyDown(KeyCode.UpArrow)) && (rb.position.x < max-range) && !dashing && canDash)
+        if((Input.GetAxis("Horizontal")>0) && ((Input.GetKeyDown("joystick button 2")) || Input.GetKeyDown(KeyCode.UpArrow)) && (rb.position.x < max-range) && !dashing && canDash)
             StartCoroutine(Dash(0.5f,1));
-        else if((Input.GetAxis("Horizontal")<0) && ((Input.GetKeyDown("joystick button 4")) || Input.GetKeyDown(KeyCode.DownArrow)) && (rb.position.x > min +range) && !dashing && canDash)
+        else if((Input.GetAxis("Horizontal")<0) && ((Input.GetKeyDown("joystick button 2")) || Input.GetKeyDown(KeyCode.UpArrow)) && (rb.position.x > min +range) && !dashing && canDash)
             StartCoroutine(Dash(0.5f,-1));
 
         //dash range control-> graphic representation: [[can dash right]    can dash both directions    [can dash left]]
