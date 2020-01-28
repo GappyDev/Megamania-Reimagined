@@ -174,6 +174,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 223974230}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 5c6d37d89cef8dc428dd3a79225508fa,
+        type: 3}
+      propertyPath: m_Name
+      value: Nave Player v3
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5c6d37d89cef8dc428dd3a79225508fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -249,11 +254,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a3b5463a51feabd4788aa1215bc172ab, type: 2}
-    - target: {fileID: -927199367670048503, guid: 5c6d37d89cef8dc428dd3a79225508fa,
-        type: 3}
-      propertyPath: m_Name
-      value: Nave Player v3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c6d37d89cef8dc428dd3a79225508fa, type: 3}
 --- !u!4 &190297521 stripped
@@ -317,6 +317,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  particlePrefab: {fileID: 100000, guid: 876cb26c7c6ab42e49a9cace28b90b8b, type: 3}
 --- !u!136 &223974228
 CapsuleCollider:
   m_ObjectHideFlags: 0
